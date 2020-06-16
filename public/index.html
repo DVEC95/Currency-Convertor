@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Currency Convertor</title>
+    <script src="./js/bundle.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+  </head>
+  <body>
+
+    <h1>Currency Convertor</h1>
+
+    <div id="app">
+
+      <label for="amount">Enter amount to exchange:</label>
+      <br>
+      <label for="eu">€</label>
+      <input type="number" step=".01" min="0" v-model="amount">
+
+      <br>
+
+      <label for="currency">Convert Into:</label>
+      <br>
+      <select id="currency" v-model="selectedCurrency">
+        <option disabled value=""></option>
+        <option :value="this.eur">EUR</option>
+        <option v-for="(rate, key) in currencies.rates" :value="{ key, rate }">{{ key }}</option>
+      </select>
+
+      <div v-if="result">
+        <h2>€{{ amount }} = {{ result.toFixed(2) }} {{ selectedCurrency.key }}</h2>
+        <h3>Converted at a rate of {{ selectedCurrency.rate.toFixed(2) }} {{ selectedCurrency.key }}</h3>
+      </div>
+
+      <h4>Values correct as of {{ currencies.date }}</h4>
+
+
+
+    </div>
+
+  </body>
+</html>
